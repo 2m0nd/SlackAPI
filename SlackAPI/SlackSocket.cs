@@ -41,16 +41,7 @@ namespace SlackAPI
         static SlackSocket()
         {
             routing = new Dictionary<string, Dictionary<string, Type>>();
-#if NET45
-             var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GlobalAssemblyCache == false);
-#elif NETSTANDARD1_6
-             var assemblies = DependencyContext.Default.GetDefaultAssemblyNames().Select(Assembly.Load);
-#elif NETSTANDARD1_3
-            var assemblies = new[] { typeof(SlackSocket).GetType().GetTypeInfo().Assembly };
-#warning Autodetection not supported
-#else
-#error Platform not supported
-#endif
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GlobalAssemblyCache == false);
             foreach (Assembly assembly in assemblies)
             {
                 Type[] assemblyTypes;
