@@ -513,6 +513,17 @@ namespace SlackAPI
             APIRequestWithToken(callback, parameters.ToArray());
         }
 
+        public void DeleteMessage(Action<DeletedResponse> callback, string channelId, string ts)
+        {
+            List<Tuple<string, string>> parameters = new List<Tuple<string, string>>()
+            {
+                new Tuple<string,string>("ts", ts),
+                new Tuple<string,string>("channel", channelId)
+            };
+
+            APIRequestWithToken(callback, parameters.ToArray());
+        }
+
         public void EmitPresence(Action<PresenceResponse> callback, Presence status)
         {
             APIRequestWithToken(callback, new Tuple<string, string>("presence", status.ToString()));
